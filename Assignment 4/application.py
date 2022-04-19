@@ -28,7 +28,7 @@ class Application:
       for sensor in range(1, self.totalSensors + 1): # creation of sensors based on variable
          sensor = WirelessNetworks()
 
-         # prompts user for 
+         # prompts user for user ID as a string with only letters
          id = (input('Enter the sensor ID: ')) 
          while any(char.isnumeric() for char in id): # loops through input serching for numeric characters
             print("This is an invalid entry for the sensor ID!")
@@ -45,11 +45,13 @@ class Application:
                print("This is an invalid entry for the number of neighbours!")
          sensor.setNeighbours(numOfNeighbours)
 
+         # iterates throughcreates each neighbouring sensor as an object
          for neighbour in range(1, sensor.neighbours + 1):
             neighbour = WirelessNetworks()
 
+            # prompts user to enter ID for neighbouring sensor
             neighbourId = input("Enter the neighbour for sensor " + sensor.id + ": ")
-            while any(char.isalpha() == False for char in neighbourId):
+            while any(char.isalpha() == False for char in neighbourId): # checks to make sure all characters 
                print("This is an invalid entry for the neighbour's name and/or distance!")
                neighbourId = input("Enter the neighbour for sensor " + sensor.id + ": ")
             neighbour.setID(neighbourId)
@@ -80,7 +82,7 @@ class Application:
 
 
 
-
+   # creates dictionary entries from user inputs
    def convertToDict(self, sensor, neighbour):
       dist = (neighbour.id, int(input("Enter the distance (m) to " + sensor.id + ": ")))
       if sensor.id not in self.sensorDict:
@@ -89,7 +91,7 @@ class Application:
          self.sensorDict[sensor.id].append(dist)
      
 
-
+   # calculates path of 
    def findPath(self):
       source = input("Enter the source sensor: ")
       path = [source]
